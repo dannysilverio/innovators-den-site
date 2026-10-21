@@ -1,0 +1,325 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: The Innovators Den API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: articles
+    description: Article operations
+paths:
+  /categories:
+    get:
+      operationId: listCategories
+      tags: [categories]
+      summary: List category names and optional Den sub-brands
+      responses:
+        "200":
+          description: Categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
+  /categories/{slug}:
+    patch:
+      operationId: updateCategory
+      tags: [categories]
+      summary: Update a category sub-brand (admin only)
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CategorySubBrandUpdate"
+      responses:
+        "200":
+          description: Saved category
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        "400":
+          description: Invalid sub-brand
+        "401":
+          description: Admin authorization required
+        "404":
+          description: Category not found
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /articles:
+    get:
+      operationId: getArticles
+      tags: [articles]
+      summary: Get articles
+      parameters:
+        - name: topic
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of articles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Article"
+    post:
+      operationId: createArticle
+      tags: [articles]
+      summary: Create article (admin)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateArticleInput"
+      responses:
+        "201":
+          description: Article created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Article"
+  /articles/{id}:
+    patch:
+      operationId: updateArticle
+      tags: [articles]
+      summary: Edit article content and optional video
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArticleUpdate"
+      responses:
+        "200":
+          description: Updated article
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Article"
+        "400":
+          description: Invalid video URL or metadata
+    get:
+      operationId: getArticle
+      tags: [articles]
+      summary: Get single article
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Article
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Article"
+  /articles/{id}/moderate:
+    patch:
+      operationId: moderateArticle
+      tags: [articles]
+      summary: Approve or reject an article
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModerateInput"
+      responses:
+        "200":
+          description: Updated article
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Article"
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    Article:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+        content:
+          type: string
+          nullable: true
+          description: Complete original story body or extracted external-source text; external text may be an excerpt.
+        videoUrl:
+          type: [string, "null"]
+          description: Optional approved HTTPS direct MP4/MOV, YouTube, Vimeo or Descript share URL.
+        videoPosterUrl:
+          type: [string, "null"]
+          description: Optional HTTPS poster image URL.
+        videoCaption:
+          type: [string, "null"]
+          maxLength: 300
+        isCreatorContent:
+          type: boolean
+        sourceName:
+          type: string
+        sourceUrl:
+          type: string
+        imageUrl:
+          type: string
+          nullable: true
+        topic:
+          type: string
+        status:
+          type: string
+        aiScore:
+          type: integer
+          nullable: true
+        isSponsored:
+          type: boolean
+        createdAt:
+          type: string
+      required:
+        - id
+        - title
+        - summary
+        - sourceName
+        - sourceUrl
+        - topic
+        - status
+        - isSponsored
+        - createdAt
+    CreateArticleInput:
+      type: object
+      properties:
+        title:
+          type: string
+        summary:
+          type: string
+        content:
+          type: [string, "null"]
+        videoUrl:
+          type: [string, "null"]
+        videoPosterUrl:
+          type: [string, "null"]
+        videoCaption:
+          type: [string, "null"]
+          maxLength: 300
+        sourceName:
+          type: string
+        sourceUrl:
+          type: string
+        imageUrl:
+          type: string
+          nullable: true
+        topic:
+          type: string
+        aiScore:
+          type: integer
+          nullable: true
+        isSponsored:
+          type: boolean
+      required:
+        - title
+        - summary
+        - sourceName
+        - sourceUrl
+        - topic
+        - isSponsored
+    ArticleUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        summary:
+          type: string
+        content:
+          type: [string, "null"]
+        topic:
+          type: string
+        imageUrl:
+          type: [string, "null"]
+        sourceName:
+          type: string
+        sourceUrl:
+          type: string
+        videoUrl:
+          type: [string, "null"]
+        videoPosterUrl:
+          type: [string, "null"]
+        videoCaption:
+          type: [string, "null"]
+          maxLength: 300
+    ModerateInput:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    Category:
+      type: object
+      required: [slug, name, subBrand]
+      properties:
+        slug:
+          type: string
+        name:
+          type: string
+        subBrand:
+          type: [string, "null"]
+    CategorySubBrandUpdate:
+      type: object
+      additionalProperties: false
+      required: [subBrand]
+      properties:
+        subBrand:
+          type: [string, "null"]
+          maxLength: 80
