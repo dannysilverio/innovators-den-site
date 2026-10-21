@@ -1,0 +1,54 @@
+# The Innovators Den
+
+> The Innovators Den is a premium cultural news app and media brand built "For Us, By Us." We deliver curated, brand-safe content across 11 topics — Innovation, Art, Culture, Music, Business Growth, Sports, Food & Wine, Health, Travel, Astrology, and Law — focused on Black excellence, entrepreneurship, and the innovator lifestyle.
+
+## About
+
+The Innovators Den is a Black-owned media company operating a mobile news app (iOS & Android) and a growing digital media presence. Our editorial voice centers Black culture, innovation, and upward mobility. We cover the stories, creators, businesses, athletes, artists, and thinkers shaping our future.
+
+Our tagline: **For Us, By Us.**
+
+## Topics We Cover
+
+- **Innovation** — Black tech founders, STEM trailblazers, emerging technology, startups
+- **Art** — Black visual artists, exhibitions, galleries, culture-defining creatives
+- **Culture** — NYC, ATL, MIA, LA scenes; Black lifestyle, style, and community
+- **Music** — Hip-hop, R&B, Afrobeats, gospel; artists, tours, new releases
+- **Business Growth** — Black entrepreneurship, finance, wealth building, real estate
+- **Sports** — NBA, NFL, track and field, tennis; Black athletes winning on and off the field
+- **Food & Wine** — Black-owned restaurants, chefs, food culture, culinary arts
+- **Health** — Wellness, mental health, fitness, nutrition for Black communities
+- **Travel** — Destination guides, travel culture, diaspora experiences
+- **Astrology** — Horoscopes, astrology culture, spiritual wellness
+- **Law** — Legal rights, business law, tax advice, justice news
+
+## App
+
+- iOS App: Available on the Apple App Store under "The Innovators Den"
+- Android App: Available on Google Play under "The Innovators Den"
+- Bundle ID: com.theinnovatorsden.app
+
+## Podcast
+
+The Innovators Den Podcast — available on Apple Podcasts and YouTube. New episodes dropping soon.
+
+## Brand
+
+- Primary Color: #000000 (Black)
+- Accent Color: #FFE600 (Neon Yellow)
+- Highlight Color: #FF4D7E (Hot Pink)
+- Founded: 2024
+- Mission: To be the definitive cultural news platform for Black innovators, entrepreneurs, creatives, and culture leaders
+
+## Content Standards
+
+All content published by The Innovators Den is:
+- Brand-safe and family-friendly (filtered against IAB brand safety categories)
+- Politically neutral (no partisan coverage)
+- Sourced from reputable publishers including TechCrunch, Bloomberg, The Root, EBONY, The Grio, Hollywood Reporter, and 40+ premium RSS feeds
+- Updated daily via automated ingestion
+
+## Contact
+
+Website: https://theinnovatorsden.net/web/
+Instagram: @theinnovatorsden

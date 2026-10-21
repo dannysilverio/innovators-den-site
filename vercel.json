@@ -1,0 +1,126 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/[...path].js": {
+      "maxDuration": 300
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/rss",
+      "schedule": "* * * * *"
+    },
+    {
+      "path": "/api/cron/maintenance",
+      "schedule": "* * * * *"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/web/topics/Dining",
+      "destination": "/web/topics/food-and-wine",
+      "statusCode": 301
+    },
+    {
+      "source": "/web/topics/dining",
+      "destination": "/web/topics/food-and-wine",
+      "statusCode": 301
+    },
+    {
+      "source": "/topics/Dining",
+      "destination": "/web/topics/food-and-wine",
+      "statusCode": 301
+    },
+    {
+      "source": "/topics/dining",
+      "destination": "/web/topics/food-and-wine",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "theinnovatorsden.xyz"
+        }
+      ],
+      "destination": "https://theinnovatorsden.net/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.theinnovatorsden.xyz"
+        }
+      ],
+      "destination": "https://theinnovatorsden.net/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "theinnovatorsden.online"
+        }
+      ],
+      "destination": "https://theinnovatorsden.net/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.theinnovatorsden.online"
+        }
+      ],
+      "destination": "https://theinnovatorsden.net/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.theinnovatorsden.net"
+        }
+      ],
+      "destination": "https://theinnovatorsden.net/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/",
+      "destination": "/web/",
+      "statusCode": 301
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/assets/:path*",
+      "destination": "/article-assets/:path*"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/api/robots.txt"
+    },
+    {
+      "source": "/llms.txt",
+      "destination": "/api/llms.txt"
+    },
+    {
+      "source": "/((?!api(?:/|$)|assets(?:/|$)|article-assets(?:/|$)|web/assets(?:/|$)).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
