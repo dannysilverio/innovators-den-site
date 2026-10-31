@@ -3,7 +3,8 @@ import { Link } from "wouter";
 import Seo from "@/components/Seo";
 import CategorySubBrand from "@/components/CategorySubBrand";
 import { fetchArticles, TOPICS, getTopicColor, getTopicEmoji, timeAgo, deriveWhyShown, type Article } from "@/lib/api";
-import { HeroSponsorBanner, WebNativeAdCard, DisplayRectangle, HouseAdCard, type Tier } from "@/components/AdUnit";
+import { DisplayRectangle, HouseAdCard, type Tier } from "@/components/AdUnit";
+import { AmicsBillboard, AmicsNativeCard } from "@/components/AmicsAd";
 import { useAuth } from "@/context/AuthContext";
 import swordStoryImage from "@assets/generated_images/michael-storm-prayer-hero.jpg";
 
@@ -480,7 +481,7 @@ export default function Home() {
 
         {/* W-HOME-001: Hero Sponsor Banner — between Spotlight and Latest Stories */}
         <div className="max-w-6xl mx-auto px-4 py-2">
-          <HeroSponsorBanner tier={adTier} index={0} />
+          <AmicsBillboard tier={adTier} />
         </div>
 
         {/* LATEST ARTICLES */}
@@ -567,7 +568,7 @@ export default function Home() {
 
         {/* W-HOME-002: Native Ad + H-001: House Ad — before App Promo */}
         <div className="max-w-6xl mx-auto px-4 pb-4">
-          <WebNativeAdCard tier={adTier} index={0} context="home" />
+          <AmicsNativeCard tier={adTier} />
           <DisplayRectangle tier={adTier} index={0} />
           <HouseAdCard variant="membership" />
         </div>
